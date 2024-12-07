@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const cors = require('cors')
 require('dotenv').config();
 const { connectToDatabase, getDb } = require('./db/conn'); // Importar conexión y función para obtener la base de datos
 
@@ -106,6 +107,7 @@ app.get('/logout', async (req, res) => {
   const db = require('./db/conn').getDb();
   try {
     const sessionID = req.sessionID;;
+    console.log(sessionID)
 
     req.session.destroy(async (err) => {
       if (err) {
@@ -144,6 +146,7 @@ function checkLogin(req, res, next){
 app.use(function (req, res, next) {
   next(createError(404));
 });
+app.use(cors())
 
 app.use(function (err, req, res, next) {
   res.locals.message = err.message;

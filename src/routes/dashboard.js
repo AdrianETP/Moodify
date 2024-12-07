@@ -46,5 +46,10 @@ router.post('/add', async (req, res) => {
 });
 
 
+router.post('/delete' ,  async (req,res) => {
+
+})
+
+
 
 module.exports = router;
